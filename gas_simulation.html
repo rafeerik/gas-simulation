@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gas Law Simulator — Rafe George and Brody Sudbeck</title>
+  <style>
+    :root{--card:#ffffff;--bg:#f3f7fb}
+    body{font-family:Inter,ui-sans-serif,system-ui,Arial;margin:0;background:var(--bg);padding:18px}
+    .wrap{max-width:1100px;margin:0 auto}
+    h1{margin:6px 0 18px;text-align:center}
+    .row{display:flex;gap:18px}
+    .controls{width:320px;background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.08)}
+    .sim{flex:1;background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.08)}
+    label{display:block;font-weight:600;margin-top:12px}
+    .small{font-weight:400;font-size:13px;color:#444}
+    input[type=range]{width:100%}
+    .status{margin-top:12px;padding:10px;background:#f7fbff;border-radius:8px;font-size:14px}
+    canvas{display:block;background:#e8f7ff;border-radius:8px}
+    .footer{margin-top:14px;font-size:13px;color:#333}
+    .muted{color:#666;font-size:13px}
+    .disabled-slider{opacity:0.55}
+    button{margin-top:10px;padding:8px 10px;border-radius:8px;border:0;background:#0077cc;color:white;font-weight:600;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Gas Law Simulator — Rafe George and Brody Sudbeck</h1>
+
+    <div class="row">
+      <div class="controls">
+        <h2>Settings</h2>
+        <label>Choose Law</label>
+        <select id="lawSelect">
+          <option value="boyle">P–V Relationship</option>
+          <option value="ideal">P–n Relationship</option>
+          <option value="pt">P–T Relationship</option>
+        </select>
+
+        <label>Independent slider (only one enabled)</label>
+        <p class="small" id="indepHelp">—</p>
+
+        <label>Temperature T (K)</label>
+        <input type="range" id="T" min="100" max="800" step="1">
+        <div class="muted">T = <span id="Tval"></span> K</div>
+
+        <label>Volume V (L)</label>
+        <input type="range" id="V" min="10" max="1000" step="1">
+        <div class="muted">V = <span id="Vval"></span> L</div>
+
+        <label>Amount n (mol)</label>
+        <input type="range" id="n" min="0.1" max="500" step="0.1">
+        <div class="muted">n = <span id="nval"></span> mol</div>
+
+        <label>Pressure P (atm) — read-only</label>
+        <input type="range" id="P" min="0.01" max="200" step="0.01" disabled class="disabled-slider">
+        <div class="muted">P = <span id="Pval"></span> atm</div>
+
+        <div class="status" id="statusBox">As V ↑ → P ↓ , As V ↓ → P ↑  
+As T ↑ → P ↑ , As T ↓ → P ↓  
+As n ↑ → P ↑ , As n ↓ → P ↓</div>
+
+        <button id="resetBtn">Reset to defaults</button>
+      </div>
+
+      <div class="sim">
+        <h2 style="text-align:center; font-size:34px; color:black;">Particle box</h2>
+        <canvas id="canvas" width="760" height="460"></canvas>
+        <div class="footer">
+          <div><strong>Note:</strong> Units: V in liters (L), T in kelvin (K), n in moles (mol), P in atmospheres (atm).</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Simulation loaded.");
+  </script>
+</body>
+</html>
